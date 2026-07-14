@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Prodigy LLC</title>
+<meta name="description" content="Digital Prodigy LLC — juegos y apps hechos con vibes. Creadores de VIBECODER.EXE.">
+<style>
+  :root{
+    --bg:#14141f; --panel:#1b1b2a; --panel2:#20202f; --line:#2c2c40;
+    --txt:#d6d6e7; --dim:#7a7a96; --green:#7ee787; --purple:#c297ff;
+    --yellow:#ffd866; --red:#ff6b81; --cyan:#78dce8;
+    --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  /* nav */
+  nav{position:sticky;top:0;background:rgba(20,20,31,.85);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);z-index:10}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;
+    font-weight:700;color:var(--txt);letter-spacing:.3px}
+  .logo:hover{text-decoration:none}
+  .logo svg{width:22px;height:26px}
+  nav .links{display:flex;gap:20px;align-items:center;font-size:13px}
+  nav .links a{color:var(--dim)}
+  nav .links a:hover{color:var(--txt);text-decoration:none}
+  #langToggle{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--panel);
+    border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer}
+  #langToggle:hover{color:var(--txt)}
+
+  /* hero */
+  .hero{padding:84px 0 60px;text-align:left}
+  .hero .prompt{font-family:var(--mono);font-size:13px;color:var(--dim);margin-bottom:18px}
+  .hero .prompt b{color:var(--green);font-weight:600}
+  h1{font-family:var(--mono);font-size:clamp(30px,6.5vw,52px);font-weight:700;
+    letter-spacing:-1.5px;line-height:1.12;margin-bottom:18px}
+  h1 .accent{color:var(--green)}
+  .hero p{font-size:17px;color:var(--dim);max-width:560px;margin-bottom:30px}
+  .hero p em{color:var(--txt);font-style:normal}
+
+  /* barra generando: el elemento firma */
+  .genbar{display:flex;align-items:center;gap:12px;max-width:460px;
+    font-family:var(--mono);font-size:12px;margin-bottom:40px}
+  .genbar .lbl{color:var(--purple);white-space:nowrap}
+  .track{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+  .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--cyan));
+    border-radius:3px;transition:width .8s ease}
+  .pct{color:var(--dim);min-width:38px;text-align:right}
+
+  .cursorblink{display:inline-block;width:9px;height:17px;background:var(--green);
+    vertical-align:-2px;animation:blink 1.05s step-end infinite}
+  @keyframes blink{50%{opacity:.2}}
+
+  /* secciones */
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--dim);
+    text-transform:uppercase;margin-bottom:14px}
+  .eyebrow::before{content:"// "}
+  h2{font-family:var(--mono);font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:14px}
+  section p{color:var(--dim);max-width:600px}
+  section p + p{margin-top:12px}
+
+  /* tarjeta del juego */
+  .gamecard{display:flex;gap:24px;align-items:center;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:26px;margin-top:26px;flex-wrap:wrap}
+  .gameicon{width:104px;height:104px;border-radius:24px;flex-shrink:0;
+    box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .gameinfo{flex:1;min-width:220px}
+  .gameinfo h3{font-family:var(--mono);font-size:19px;margin-bottom:6px}
+  .gameinfo h3 .v{color:var(--purple)}
+  .gameinfo p{font-size:14px;margin-bottom:14px}
+  .badge{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--yellow);
+    border:1px solid var(--yellow);border-radius:20px;padding:5px 14px;letter-spacing:.5px}
+  .squiggle{width:100%;height:12px;margin-top:22px;opacity:.55}
+
+  /* contacto */
+  .contactline{font-family:var(--mono);font-size:14px;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-top:20px;
+    display:inline-block}
+  .contactline .k{color:var(--dim)}
+  .contactline .v{color:var(--green)}
+
+  footer{border-top:1px solid var(--line);padding:34px 0 46px;
+    font-size:12.5px;color:var(--dim)}
+  footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  footer a{color:var(--dim);text-decoration:underline}
+  footer a:hover{color:var(--txt)}
+
+  @media (prefers-reduced-motion:reduce){
+    .cursorblink{animation:none}
+    .fill{transition:none}
+    html{scroll-behavior:auto}
+  }
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 42 50" aria-hidden="true"><rect x="1" y="1" width="40" height="48" rx="7" fill="#7ee787"/><rect x="11" y="15" width="6" height="10" rx="2" fill="#14141f"/><rect x="24" y="15" width="6" height="10" rx="2" fill="#14141f"/><rect x="15" y="32" width="11" height="4" rx="2" fill="#14141f"/></svg>
+      digitalprodigy<span style="color:var(--dim)">.app</span>
+    </a>
+    <div class="links">
+      <a href="#juego" data-i18n="navGame">El juego</a>
+      <a href="#estudio" data-i18n="navStudio">El estudio</a>
+      <a href="#contacto" data-i18n="navContact">Contacto</a>
+      <button id="langToggle" aria-label="Switch language">EN</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <p class="prompt"><b>prodigy@digital</b>:~$ <span data-i18n="promptCmd">./hacer_cosas_divertidas.sh</span><span class="cursorblink"></span></p>
+  <h1 data-i18n-html="heroTitle">Hacemos juegos<br>mientras la IA <span class="accent">genera</span>.</h1>
+  <p data-i18n-html="heroSub">Digital Prodigy es un estudio indie que construye juegos y apps con más <em>vibes</em> que reuniones. Nuestro primer lanzamiento está casi listo. La barra lo confirma:</p>
+  <div class="genbar" aria-hidden="true">
+    <span class="lbl" id="genlbl" data-i18n="genLbl">✳ Generando…</span>
+    <div class="track"><div class="fill" id="genfill"></div></div>
+    <span class="pct" id="genpct">0%</span>
+  </div>
+</header>
+
+<section id="juego" class="wrap">
+  <p class="eyebrow" data-i18n="gameEyebrow">próximo lanzamiento</p>
+  <h2>VIBECODER.EXE</h2>
+  <p data-i18n="gameDesc">El juego para esos minutos eternos mientras la IA vibecodea tu app: salta bugs, esquiva merge conflicts, sobrevive al error 429 y acumula tokens. Un toque para saltar. Cero anuncios, cero recogida de datos. Solo vibes.</p>
+  <div class="gamecard">
+    <svg class="gameicon" viewBox="0 0 1024 1024" role="img" aria-label="Icono de VIBECODER.EXE">
+      <defs>
+        <radialGradient id="g1" cx="50%" cy="46%" r="60%">
+          <stop offset="0%" stop-color="#1e2b22"/><stop offset="55%" stop-color="#161a24"/><stop offset="100%" stop-color="#14141f"/>
+        </radialGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8ff29a"/><stop offset="100%" stop-color="#5fd873"/>
+        </linearGradient>
+        <clipPath id="rr"><rect width="1024" height="1024" rx="230"/></clipPath>
+      </defs>
+      <g clip-path="url(#rr)">
+        <rect width="1024" height="1024" fill="url(#g1)"/>
+        <rect x="312" y="278" width="420" height="500" rx="64" fill="#000" opacity=".35"/>
+        <rect x="312" y="252" width="420" height="500" rx="64" fill="url(#g2)"/>
+        <rect x="418" y="410" width="58" height="96" rx="20" fill="#14141f"/>
+        <rect x="548" y="410" width="58" height="96" rx="20" fill="#14141f"/>
+        <rect x="466" y="576" width="92" height="34" rx="16" fill="#14141f"/>
+        <path d="M 300 836 q 22 -26 44 0 t 44 0 t 44 0 t 44 0 t 44 0 t 44 0 t 44 0 t 44 0 t 44 0 t 44 0" fill="none" stroke="#ff6b81" stroke-width="14" stroke-linecap="round" opacity=".9"/>
+      </g>
+    </svg>
+    <div class="gameinfo">
+      <h3>VIBECODER<span class="v">.EXE</span></h3>
+      <p data-i18n="gameCardDesc">Endless runner de terminal. Español e inglés. Vibración háptica para sentir cada crash.</p>
+      <span class="badge" data-i18n="gameBadge">⏳ Próximamente en el App Store</span>
+    </div>
+  </div>
+  <svg class="squiggle" viewBox="0 0 800 12" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M 0 6 q 10 -10 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" fill="none" stroke="#ff6b81" stroke-width="3"/>
+  </svg>
+</section>
+
+<section id="estudio" class="wrap">
+  <p class="eyebrow" data-i18n="studioEyebrow">quiénes somos</p>
+  <h2 data-i18n="studioTitle">El estudio</h2>
+  <p data-i18n="studioP1">Digital Prodigy LLC es un estudio independiente de software registrado en Wyoming, Estados Unidos. Diseñamos y publicamos juegos y aplicaciones móviles pequeñas, cuidadas y con sentido del humor.</p>
+  <p data-i18n="studioP2">Creemos que el mejor software es el que se hace disfrutando — y que los tiempos de espera también merecen buen diseño.</p>
+</section>
+
+<section id="contacto" class="wrap">
+  <p class="eyebrow" data-i18n="contactEyebrow">hablemos</p>
+  <h2 data-i18n="contactTitle">Contacto</h2>
+  <p data-i18n="contactDesc">Para soporte, prensa o cualquier consulta:</p>
+  <div class="contactline"><span class="k">email:</span> <a class="v" href="mailto:hello@digitalprodigy.app">hello@digitalprodigy.app</a></div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Digital Prodigy LLC · Wyoming, USA</span>
+    <span><a href="privacy.html" data-i18n="footerPrivacy">Política de privacidad</a></span>
+  </div>
+</footer>
+
+<script>
+// ---- i18n ----
+const I18N = {
+  es: {
+    navGame:"El juego", navStudio:"El estudio", navContact:"Contacto",
+    promptCmd:"./hacer_cosas_divertidas.sh",
+    heroTitle:'Hacemos juegos<br>mientras la IA <span class="accent">genera</span>.',
+    heroSub:'Digital Prodigy es un estudio indie que construye juegos y apps con más <em>vibes</em> que reuniones. Nuestro primer lanzamiento está casi listo. La barra lo confirma:',
+    genLbl:"✳ Generando…",
+    gameEyebrow:"próximo lanzamiento",
+    gameDesc:"El juego para esos minutos eternos mientras la IA vibecodea tu app: salta bugs, esquiva merge conflicts, sobrevive al error 429 y acumula tokens. Un toque para saltar. Cero anuncios, cero recogida de datos. Solo vibes.",
+    gameCardDesc:"Endless runner de terminal. Español e inglés. Vibración háptica para sentir cada crash.",
+    gameBadge:"⏳ Próximamente en el App Store",
+    studioEyebrow:"quiénes somos", studioTitle:"El estudio",
+    studioP1:"Digital Prodigy LLC es un estudio independiente de software registrado en Wyoming, Estados Unidos. Diseñamos y publicamos juegos y aplicaciones móviles pequeñas, cuidadas y con sentido del humor.",
+    studioP2:"Creemos que el mejor software es el que se hace disfrutando — y que los tiempos de espera también merecen buen diseño.",
+    contactEyebrow:"hablemos", contactTitle:"Contacto",
+    contactDesc:"Para soporte, prensa o cualquier consulta:",
+    footerPrivacy:"Política de privacidad",
+    genPhrases:["✳ Generando…","✳ Pensando…","✳ Refactorizando…","✳ Casi listo…","✳ Optimizando vibes…","✳ Compilando…"]
+  },
+  en: {
+    navGame:"The game", navStudio:"The studio", navContact:"Contact",
+    promptCmd:"./make_fun_things.sh",
+    heroTitle:'We make games<br>while the AI <span class="accent">generates</span>.',
+    heroSub:'Digital Prodigy is an indie studio building games and apps with more <em>vibes</em> than meetings. Our first release is almost ready. The bar confirms it:',
+    genLbl:"✳ Generating…",
+    gameEyebrow:"upcoming release",
+    gameDesc:"The game for those endless minutes while the AI vibecodes your app: jump bugs, dodge merge conflicts, survive the 429 error and stack tokens. One tap to jump. Zero ads, zero data collection. Just vibes.",
+    gameCardDesc:"Terminal endless runner. English and Spanish. Haptic feedback so you feel every crash.",
+    gameBadge:"⏳ Coming soon to the App Store",
+    studioEyebrow:"who we are", studioTitle:"The studio",
+    studioP1:"Digital Prodigy LLC is an independent software studio registered in Wyoming, USA. We design and publish small, carefully crafted mobile games and apps with a sense of humor.",
+    studioP2:"We believe the best software is made while having fun — and that waiting times deserve good design too.",
+    contactEyebrow:"say hi", contactTitle:"Contact",
+    contactDesc:"For support, press, or anything else:",
+    footerPrivacy:"Privacy policy",
+    genPhrases:["✳ Generating…","✳ Thinking…","✳ Refactoring…","✳ Almost there…","✳ Optimizing vibes…","✳ Compiling…"]
+  }
+};
+let lang = (localStorage.getItem('dp-lang')) ||
+  ((navigator.language||"en").toLowerCase().startsWith("es") ? "es" : "en");
+
+function applyLang(){
+  const T = I18N[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n'); if(T[k]) el.textContent = T[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-html'); if(T[k]) el.innerHTML = T[k];
+  });
+  document.getElementById('langToggle').textContent = lang==="es" ? "EN" : "ES";
+}
+document.getElementById('langToggle').addEventListener('click',()=>{
+  lang = lang==="es" ? "en" : "es";
+  localStorage.setItem('dp-lang', lang);
+  applyLang();
+});
+applyLang();
+
+// ---- la barra que nunca termina ----
+let genP = 0;
+const genfill = document.getElementById('genfill');
+const genpct = document.getElementById('genpct');
+const genlbl = document.getElementById('genlbl');
+setInterval(()=>{
+  genP += (99-genP)*0.05 + Math.random()*0.4;
+  if(genP>98.9) genP = 72 + Math.random()*8;
+  genfill.style.width = genP+"%";
+  genpct.textContent = Math.floor(genP)+"%";
+  if(Math.random()<0.13) genlbl.textContent = I18N[lang].genPhrases[Math.floor(Math.random()*I18N[lang].genPhrases.length)];
+},1000);
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
