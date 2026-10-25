@@ -48,16 +48,21 @@ you delete the app, that data is deleted with it. You can also erase everything
 at any time from Settings.</p>
 
 <h2>How dream interpretation works</h2>
-<p>To interpret a dream, the app sends the text of that single dream to the
-Anthropic API, which runs the AI model that produces the interpretation. This
+<p>To interpret a dream, the app sends the text of that single dream to our
+server, a small relay hosted by Cloudflare, which adds our access key and
+forwards it to the Anthropic API, which runs the AI model that produces the
+interpretation. This
 is the only situation in which information leaves your device, and it happens
 only when an interpretation is requested.</p>
 <ul>
   <li>Only the text of the individual dream is sent. No identifier, no account,
       no other dreams and nothing else from your journal.</li>
   <li>The interpretation is returned to your device and stored there.</li>
-  <li>We do not receive, store or have access to the text you send or the
-      interpretation you receive.</li>
+  <li>Our relay passes the text and the interpretation straight through: it
+      does not store or log them, and no one at Digital Prodigy reads them.
+      Cloudflare keeps basic technical records of each request (such as the
+      time, the result and network information, never the dream or the
+      interpretation) for a few days.</li>
 </ul>
 <p>Anthropic processes this text as our service provider in order to generate
 the interpretation. Their handling of API data is described in their
